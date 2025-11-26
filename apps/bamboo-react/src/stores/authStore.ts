@@ -29,7 +29,7 @@ interface AuthState {
   // Actions
   login: (email: string, password: string, tenantId?: string) => Promise<void>;
   logout: () => Promise<void>;
-  refreshToken: () => Promise<void>;
+  refreshSession: () => Promise<void>;
   updateProfile: (profile: Partial<User>) => Promise<void>;
   switchTenant: (tenantId: string) => Promise<void>;
   checkAuth: () => Promise<void>;
@@ -51,7 +51,7 @@ export const useAuthStore = create<AuthState>()(
         error: null,
 
         // Actions
-        login: async (email: string, password: string, tenantId?: string) => {
+        login: async (email: string, _password: string, tenantId?: string) => {
           set({ isLoading: true, error: null });
 
           try {
@@ -122,7 +122,7 @@ export const useAuthStore = create<AuthState>()(
           }
         },
 
-        refreshToken: async () => {
+        refreshSession: async () => {
           const { refreshToken: currentRefreshToken } = get();
           if (!currentRefreshToken) {
             return;

@@ -49,18 +49,18 @@ Criar uma interface web moderna, performática e enterprise-ready para o Bamboo 
 **Story**: Como desenvolvedor, eu preciso criar a estrutura base do projeto frontend Bamboo ERP usando Vite + React + TypeScript
 
 **Acceptance Criteria:**
-- [ ] Projeto Vite + React + TypeScript criado
-- [ ] Estrutura de pastas organizada seguindo boas práticas
-- [ ] Configuração ESLint + Prettier
-- [ ] Build e dev server funcionando
-- [ ] Git repository configurado com branches main/dev/feature
+- [x] Projeto Vite + React + TypeScript criado
+- [x] Estrutura de pastas organizada seguindo boas práticas
+- [x] Configuração ESLint + Prettier
+- [x] Build e dev server funcionando
+- [x] Git repository configurado com branches main/dev/feature
 
 **Tasks:**
-- [ ] `npm create vite@latest bamboo-frontend -- --template react-ts`
-- [ ] Configurar estrutura de pastas `/src/{components,hooks,services,stores,types,utils}`
-- [ ] Setup ESLint + Prettier configurations
-- [ ] Configurar VSCode workspace settings
-- [ ] Criar README.md com setup instructions
+- [x] `npm create vite@latest bamboo-frontend -- --template react-ts`
+- [x] Configurar estrutura de pastas `/src/{components,hooks,services,stores,types,utils}`
+- [x] Setup ESLint + Prettier configurations
+- [x] Configurar VSCode workspace settings
+- [x] Criar README.md com setup instructions
 
 **Estimation**: 2 dias
 **Dependencies**: Nenhumas
@@ -72,21 +72,21 @@ Criar uma interface web moderna, performática e enterprise-ready para o Bamboo 
 **Story**: Como desenvolvedor, eu preciso instalar e configurar as dependências essenciais para o projeto
 
 **Acceptance Criteria:**
-- [ ] React Router DOM configurado
-- [ ] TanStack Query para API calls
-- [ ] Zustand para state management
-- [ ] Axios para HTTP client
-- [ ] Day.js para data manipulation
-- [ ] TailwindCSS para styling
-- [ ] Todas dependências versões estáveis
+- [x] React Router DOM configurado
+- [x] TanStack Query para API calls
+- [x] Zustand para state management
+- [x] Axios para HTTP client
+- [x] Day.js para data manipulation
+- [x] TailwindCSS para styling
+- [x] Todas dependências versões estáveis
 
 **Tasks:**
-- [ ] `npm install react-router-dom @tanstack/react-query zustand axios day.js`
-- [ ] `npm install -D tailwindcss postcss autoprefixer`
-- [ ] Configurar TailwindCSS
-- [ ] Setup Router configuration
-- [ ] Configurar React Query provider
-- [ ] Criar store base com Zustand
+- [x] `npm install react-router-dom @tanstack/react-query zustand axios day.js`
+- [x] `npm install -D tailwindcss postcss autoprefixer`
+- [x] Configurar TailwindCSS
+- [x] Setup Router configuration
+- [x] Configurar React Query provider
+- [x] Criar store base com Zustand
 
 **Estimation**: 1 dia
 **Dependencies**: BACKLOG-001

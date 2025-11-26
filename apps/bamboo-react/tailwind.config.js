@@ -62,23 +62,5 @@ export default {
       },
     },
   },
-  plugins: [
-    // Syncfusion integration
-    function({ addUtilities, theme }) {
-      addUtilities({
-        '.syncfusion-container': {
-          '@apply font-sans text-gray-900': {},
-        },
-        '.syncfusion-input': {
-          '@apply border-gray-300 focus:border-bamboo-primary focus:ring-bamboo-primary rounded-md': {},
-        },
-        '.syncfusion-button': {
-          '@apply bg-bamboo-primary hover:bg-bamboo-primary text-white font-medium py-2 px-4 rounded-md transition-colors': {},
-        },
-        '.syncfusion-grid': {
-          '@apply border border-gray-200 rounded-lg overflow-hidden': {},
-        },
-      });
-    },
-  ],
+  plugins: [],
 }

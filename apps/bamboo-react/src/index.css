@@ -2,244 +2,87 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Bamboo ERP Global Styles */
-@layer base {
-  :root {
-    font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-    font-weight: 400;
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    margin: 0;
-    font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
-    background-color: #f8fafc;
-    color: #334155;
-    min-height: 100vh;
-  }
-
-  #root {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
+/* Bamboo ERP Base Styles */
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: #f8fafc;
+  color: #334155;
+  min-height: 100vh;
 }
 
-@layer components {
-  /* Button Components */
-  .btn {
-    @apply font-medium py-2 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
-  }
-
-  .btn-primary {
-    @apply bg-bamboo-primary text-white hover:bg-bamboo-primary/90 focus:ring-bamboo-primary;
-  }
-
-  .btn-secondary {
-    @apply bg-gray-600 text-white hover:bg-gray-700 focus:ring-gray-500;
-  }
-
-  .btn-success {
-    @apply bg-green-600 text-white hover:bg-green-700 focus:ring-green-500;
-  }
-
-  .btn-warning {
-    @apply bg-yellow-600 text-white hover:bg-yellow-700 focus:ring-yellow-500;
-  }
-
-  .btn-danger {
-    @apply bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
-  }
-
-  .btn-outline {
-    @apply border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:ring-bamboo-primary;
-  }
-
-  /* Card Components */
-  .card {
-    @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6;
-  }
-
-  .card-header {
-    @apply border-b border-gray-200 pb-4 mb-4;
-  }
-
-  .card-title {
-    @apply text-lg font-semibold text-gray-900;
-  }
-
-  .card-description {
-    @apply text-sm text-gray-600 mt-1;
-  }
-
-  /* Form Components */
-  .form-group {
-    @apply mb-4;
-  }
-
-  .form-label {
-    @apply block text-sm font-medium text-gray-700 mb-2;
-  }
-
-  .form-input {
-    @apply block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-bamboo-primary focus:border-bamboo-primary sm:text-sm;
-  }
-
-  .form-error {
-    @apply text-sm text-red-600 mt-1;
-  }
-
-  /* Layout Components */
-  .page-container {
-    @apply container mx-auto px-4 py-6 max-w-7xl;
-  }
-
-  .page-header {
-    @apply mb-6;
-  }
-
-  .page-title {
-    @apply text-2xl font-bold text-gray-900;
-  }
-
-  .page-description {
-    @apply text-gray-600 mt-2;
-  }
-
-  /* Navigation */
-  .nav-link {
-    @apply flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors;
-  }
-
-  .nav-link.active {
-    @apply bg-bamboo-primary/10 text-bamboo-primary;
-  }
-
-  .nav-link:not(.active) {
-    @apply text-gray-600 hover:bg-gray-50 hover:text-gray-900;
-  }
-
-  /* Status Indicators */
-  .status-badge {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
-  }
-
-  .status-success {
-    @apply bg-green-100 text-green-800;
-  }
-
-  .status-warning {
-    @apply bg-yellow-100 text-yellow-800;
-  }
-
-  .status-error {
-    @apply bg-red-100 text-red-800;
-  }
-
-  .status-info {
-    @apply bg-blue-100 text-blue-800;
-  }
-
-  /* Loading States */
-  .loading-spinner {
-    @apply animate-spin rounded-full border-2 border-gray-300 border-t-bamboo-primary;
-  }
-
-  /* Syncfusion Integration */
-  .syncfusion-container {
-    @apply font-sans text-gray-900;
-  }
-
-  .e-grid .e-headercell {
-    @apply bg-gray-50 text-gray-900 font-medium;
-  }
-
-  .e-grid .e-rowcell {
-    @apply text-gray-900;
-  }
-
-  .e-input-group .e-input {
-    @apply border-gray-300 focus:border-bamboo-primary focus:ring-bamboo-primary;
-  }
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-@layer utilities {
-  /* Custom Animations */
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease-in-out;
-  }
-
-  .animate-slide-up {
-    animation: slideUp 0.3s ease-out;
-  }
-
-  .animate-slide-down {
-    animation: slideDown 0.3s ease-out;
-  }
-
-  .animate-scale-in {
-    animation: scaleIn 0.2s ease-out;
-  }
-
-  /* Text Utilities */
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  /* Focus Styles */
-  .focus-ring {
-    @apply focus:outline-none focus:ring-2 focus:ring-bamboo-primary focus:ring-offset-2;
-  }
+/* Custom Components */
+.btn {
+  @apply font-medium py-2 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
 }
 
-/* Dark Mode Support */
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-  }
-
-  body {
-    background-color: #0f172a;
-    color: #e2e8f0;
-  }
-
-  .card {
-    @apply bg-gray-800 border-gray-700;
-  }
-
-  .form-input {
-    @apply bg-gray-700 border-gray-600 text-white;
-  }
-
-  .nav-link:not(.active) {
-    @apply text-gray-400 hover:bg-gray-700 hover:text-white;
-  }
+.btn-primary {
+  @apply bg-green-600 text-white hover:bg-green-700 focus:ring-green-500;
 }
 
-/* Print Styles */
-@media print {
-  .no-print {
-    display: none !important;
-  }
+.btn-secondary {
+  @apply bg-gray-600 text-white hover:bg-gray-700 focus:ring-gray-500;
+}
 
-  body {
-    background: white !important;
-    color: black !important;
-  }
+.btn-success {
+  @apply bg-green-600 text-white hover:bg-green-700 focus:ring-green-500;
+}
 
-  .card {
-    @apply shadow-none border border-gray-300;
-  }
+.btn-warning {
+  @apply bg-yellow-600 text-white hover:bg-yellow-700 focus:ring-yellow-500;
+}
+
+.btn-danger {
+  @apply bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
+}
+
+.btn-outline {
+  @apply border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:ring-green-500;
+}
+
+.card {
+  @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6;
+}
+
+.card-header {
+  @apply border-b border-gray-200 pb-4 mb-4;
+}
+
+.card-title {
+  @apply text-lg font-semibold text-gray-900;
+}
+
+.card-description {
+  @apply text-sm text-gray-600 mt-1;
+}
+
+.form-group {
+  @apply mb-4;
+}
+
+.form-label {
+  @apply block text-sm font-medium text-gray-700 mb-2;
+}
+
+.form-input {
+  @apply block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm;
+}
+
+.form-error {
+  @apply text-sm text-red-600 mt-1;
+}
+
+.container {
+  @apply mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Loading States */
+.loading-spinner {
+  @apply animate-spin rounded-full border-2 border-gray-300 border-t-green-500;
 }

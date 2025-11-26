@@ -125,8 +125,9 @@ export const useViewStore = create<ViewState>()(
         }
       },
 
-      loadRecords: async (viewId: string, page = 1, pageSize = 20, filters = [], sorts = []) => {
+      loadRecords: async (_viewId: string, page = 1, pageSize = 20, filters = [], sorts = []) => {
         set({ isLoading: true, error: null });
+        void _viewId;
 
         try {
           // TODO: Implement actual API call
