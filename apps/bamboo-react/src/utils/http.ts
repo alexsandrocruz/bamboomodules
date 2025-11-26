@@ -19,13 +19,29 @@ export interface PaginatedResponse<T> {
   totalPages: number;
 }
 
+const trimTrailingSlash = (value?: string) => {
+  if (!value) return '';
+  return value.endsWith('/') ? value.slice(0, -1) : value;
+};
+
+const withBaseUrl = (path: string, baseUrl?: string) => {
+  const normalizedBase = trimTrailingSlash(baseUrl);
+  if (!normalizedBase) return path;
+  return `${normalizedBase}${path}`;
+};
+
+const API_BASE_URL = trimTrailingSlash(import.meta.env.VITE_API_BASE_URL);
+const AUTH_BASE_URL = trimTrailingSlash(import.meta.env.VITE_AUTH_BASE_URL);
+
 // HTTP Client configuration
 const httpConfig: AxiosRequestConfig = {
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:7104',
+  // When baseURL is undefined Axios will use the current origin, which plays
+  // nicely with the Vite dev proxy and reverse proxies in production.
+  baseURL: API_BASE_URL || undefined,
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
-    'Accept': 'application/json',
+    Accept: 'application/json',
   },
 };
 
@@ -163,7 +179,7 @@ export const abpHttp = {
 
   // ABP authentication endpoints
   login: async (username: string, password: string, tenantId?: string): Promise<ApiResponse> => {
-    const response = await fetch('/connect/token', {
+    const response = await fetch(withBaseUrl('/connect/token', AUTH_BASE_URL), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -187,7 +203,7 @@ export const abpHttp = {
   },
 
   logout: async (): Promise<ApiResponse> => {
-    const response = await fetch('/connect/revocation', {
+    const response = await fetch(withBaseUrl('/connect/revocation', AUTH_BASE_URL), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -202,11 +218,12 @@ export const abpHttp = {
   },
 
   getCurrentUser: async (): Promise<ApiResponse> => {
-    return http.get('/api/abp/application-configuration');
+    const url = withBaseUrl('/api/abp/application-configuration', API_BASE_URL);
+    return http.get(url);
   },
 
   refreshToken: async (refreshToken: string): Promise<ApiResponse> => {
-    const response = await fetch('/connect/token', {
+    const response = await fetch(withBaseUrl('/connect/token', AUTH_BASE_URL), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',

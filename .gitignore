@@ -262,3 +262,9 @@ src/Bamboo.IdentityServer/Logs/*
 src/Bamboo.HttpApi.Host/Logs/*
 src/Bamboo.HttpApi.HostWithIds/Logs/*
 src/Bamboo.DbMigrator/Logs/*
+
+# Frontend env overrides
+apps/bamboo-react/.env
+apps/bamboo-react/.env.local
+apps/bamboo-react/.env.*.local
+apps/bamboo-react/.env.production

@@ -16,6 +16,29 @@ services:
       - abp-network
     restart: "always"
 
+  app-frontend:
+    image: node:20-alpine
+    container_name: bamboo-frontend
+    working_dir: /app
+    ports:
+      - "${VITE_DEV_SERVER_PORT:-5173}:${VITE_DEV_SERVER_PORT:-5173}"
+    environment:
+      - VITE_DEV_SERVER_PORT=${VITE_DEV_SERVER_PORT:-5173}
+      - VITE_API_PROXY_TARGET=${VITE_API_PROXY_TARGET:-http://app-core:8080}
+      - VITE_AUTH_PROXY_TARGET=${VITE_AUTH_PROXY_TARGET:-http://auth-server:8080}
+      - VITE_USE_POLLING=true
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./apps/bamboo-react:/app
+      - /app/node_modules
+    command: sh -c "npm ci && npm run dev -- --host --port ${VITE_DEV_SERVER_PORT:-5173}"
+    depends_on:
+      - app-core
+      - auth-server
+    networks:
+      - abp-network
+    restart: unless-stopped
+
   auth-server:
     image: bamboo-auth-server:latest
     container_name: bamboo-auth-server

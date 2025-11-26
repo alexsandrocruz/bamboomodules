@@ -22,26 +22,24 @@ Frontend React + TypeScript para o Bamboo ERP, construído com Vite, Syncfusion 
 - Node.js >= 18.x
 - npm >= 9.x
 
-### Installation
+### Installation & Environment
+
+1. Copie `.env.example` para `.env.local` (ou use o `.env.development` já preenchido) e ajuste as URLs do backend conforme seu ambiente.
+2. Instale as dependências e rode o dev server com hot reload + proxy para o backend ABP.
 
 ```bash
-# Install dependencies
 npm install
-
-# Start development server
-npm run dev
-
-# Build for production
+npm run dev       # hot reload + proxy /api e /connect
 npm run build
-
-# Preview production build
 npm run preview
+npm run test
 ```
 
 ### Development URLs
 
 - **Development**: http://localhost:5173
-- **Backend API**: http://localhost:7104 (Core API)
+- **Core API**: http://localhost:7105
+- **Admin API**: http://localhost:7104 (quando necessário)
 - **Authentication**: http://localhost:7103 (Auth Server)
 
 ## 📁 Estrutura do Projeto
@@ -96,21 +94,24 @@ src/
 
 ### Environment Variables
 
-Create `.env.local` file:
+Use `.env.example` como base. Há presets prontos em `.env.development` (localhost) e `.env.docker` (docker compose).
 
 ```env
-# Backend Configuration
-VITE_API_BASE_URL=http://localhost:7104
-VITE_AUTH_BASE_URL=http://localhost:7103
+# Backend (deixe vazio para usar o host atual + proxy)
+VITE_API_BASE_URL=
+VITE_AUTH_BASE_URL=
 
-# Application
-VITE_APP_NAME=Bamboo ERP
-VITE_APP_VERSION=1.0.0
+# Dev server
+VITE_DEV_SERVER_PORT=5173
+VITE_USE_POLLING=false
 
-# Features (toggle during development)
-VITE_ENABLE_SYNCFUSION=true
-VITE_ENABLE_ANALYTICS=false
+# Proxy targets (dev)
+VITE_API_PROXY_TARGET=http://localhost:7105
+VITE_AUTH_PROXY_TARGET=http://localhost:7103
 ```
+
+- Para rodar dentro do Docker compose, carregue `.env.docker` ou defina `VITE_API_PROXY_TARGET=http://app-core:8080` e `VITE_AUTH_PROXY_TARGET=http://auth-server:8080`.
+- Em produção, defina `VITE_API_BASE_URL`/`VITE_AUTH_BASE_URL` se o frontend estiver em domínio separado; caso contrário mantenha vazio e use o proxy/reverse-proxy padrão.
 
 ### Syncfusion Configuration
 
@@ -191,30 +192,27 @@ npm run test
 
 # Run tests in watch mode
 npm run test:watch
-
-# Generate coverage report
-npm run test:coverage
 ```
 
 ## 📦 Build & Deployment
 
-### Development Build
+### Build e preview locais
 ```bash
-npm run build:dev
+npm run build
+npm run preview
 ```
 
-### Production Build
+### Docker (dev + hot reload)
 ```bash
-npm run build:prod
+# sobe frontend + serviços ABP necessários
+docker compose up app-core auth-server app-frontend
+# acessa http://localhost:5173 (proxy já configurado para /api e /connect)
 ```
 
-### Docker Build
+### Docker (imagem de produção)
 ```bash
-# Build Docker image
-docker build -t bamboo-frontend .
-
-# Run container
-docker run -p 5173:5173 bamboo-frontend
+docker build -f apps/bamboo-react/Dockerfile -t bamboo-frontend:latest --target production apps/bamboo-react
+docker run -p 8080:80 bamboo-frontend:latest
 ```
 
 ## 🔗 Integration
@@ -269,7 +267,7 @@ registerLicense('YOUR_LICENSE_KEY');
 **API Connection Issues**
 ```bash
 # Check backend URLs in .env.local
-VITE_API_BASE_URL=http://localhost:7104
+VITE_API_BASE_URL=http://localhost:7105
 ```
 
 **TypeScript Errors**
