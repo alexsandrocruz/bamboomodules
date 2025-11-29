@@ -67,6 +67,11 @@ dotnet ef database update --startup-project services/core/host/Bamboo.Core.HttpA
 # Docker Compose (recommended)
 docker compose up -d
 
+# Frontend Development (React)
+cd apps/bamboo-react
+npm install
+npm run dev        # Development server on port 5173
+
 # Visual Studio Development
 1. Open services/admin/Bamboo.Admin.sln - run Bamboo.Admin.HttpApi.Host
 2. Open services/core/Bamboo.Core.sln - run Bamboo.Core.HttpApi.Host
@@ -88,6 +93,11 @@ dotnet test services/admin/src/Bamboo.Admin.EntityFrameworkCore.Tests/
 dotnet test services/core/src/Bamboo.Core.Application.Tests/
 dotnet test services/core/src/Bamboo.Core.Domain.Tests/
 dotnet test services/core/src/Bamboo.Core.EntityFrameworkCore.Tests/
+
+# Frontend tests
+cd apps/bamboo-react
+npm run test          # Run all tests
+npm run test:watch    # Run tests in watch mode
 ```
 
 ## Key Implementation Details
@@ -143,6 +153,56 @@ dotnet test services/core/src/Bamboo.Core.EntityFrameworkCore.Tests/
 - **7179**: Redis
 - **7101/7102**: MinIO API/Console
 
+## Frontend Development
+
+### React Frontend (`apps/bamboo-react/`)
+- **Technology Stack**: React 19.2.0, TypeScript, Vite 7.2.4, TailwindCSS 3.4.14
+- **State Management**: Zustand for reactive state management
+- **HTTP Client**: Axios with custom interceptors for ABP integration
+- **Testing**: Vitest with jsdom environment
+- **Code Quality**: ESLint with Prettier integration
+
+### Frontend Development Commands
+```bash
+# Navigate to frontend directory
+cd apps/bamboo-react
+
+# Development
+npm run dev          # Start development server on port 5173
+npm run build        # Build for production
+npm run preview      # Preview production build
+npm run test         # Run tests
+npm run test:watch   # Run tests in watch mode
+
+# Code Quality
+npm run lint         # Run ESLint
+npm run lint:fix     # Fix ESLint issues
+npm run format       # Format code with Prettier
+```
+
+### Frontend Architecture
+- **Components**: Located in `src/components/` with separation for common, ABP integration, and view processors
+- **State Management**: Zustand stores in `src/stores/` (auth, view management)
+- **API Integration**: HTTP utilities in `src/utils/http.ts` with ABP-specific methods
+- **Styling**: TailwindCSS with custom Bamboo ERP brand colors
+- **Backend Integration**: Automatic API proxying to Core service (port 7105) and Auth service (port 7103)
+
+### Environment Configuration
+```bash
+# Development environment
+cp .env.example .env.development
+# Configure backend URLs:
+VITE_API_PROXY_TARGET=http://localhost:7105  # Core API
+VITE_AUTH_PROXY_TARGET=http://localhost:7103 # Auth Server
+```
+
+### Frontend Development Workflow
+- Uses Vite for fast hot reload and development server
+- Automatic proxy configuration for `/api` and `/connect` routes
+- Docker integration with hot reload support
+- TypeScript strict mode for type safety
+- ABP Framework integration for authentication and multi-tenancy
+
 ## Development Workflow
 
 ### Adding New Entities
@@ -163,7 +223,9 @@ dotnet test services/core/src/Bamboo.Core.EntityFrameworkCore.Tests/
 - Ensure source Odoo database is multi-company and has NULL values cleaned
 
 ### Testing Strategy
-- Unit tests for domain logic in each service's `.Tests` projects
-- Integration tests for Entity Framework operations
-- API client tests for service communication
-- Use `Bamboo.*.TestBase` projects for common test setup
+- **Backend**: Unit tests for domain logic in each service's `.Tests` projects
+- **Backend**: Integration tests for Entity Framework operations
+- **Backend**: API client tests for service communication
+- **Backend**: Use `Bamboo.*.TestBase` projects for common test setup
+- **Frontend**: Vitest with jsdom environment for React components
+- **Frontend**: ESLint + Prettier for code quality and consistency

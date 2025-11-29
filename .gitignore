@@ -263,8 +263,14 @@ src/Bamboo.HttpApi.Host/Logs/*
 src/Bamboo.HttpApi.HostWithIds/Logs/*
 src/Bamboo.DbMigrator/Logs/*
 
+# Root env file
+.env
+
 # Frontend env overrides
 apps/bamboo-react/.env
 apps/bamboo-react/.env.local
 apps/bamboo-react/.env.*.local
 apps/bamboo-react/.env.production
+
+# Docker data directories
+data/
