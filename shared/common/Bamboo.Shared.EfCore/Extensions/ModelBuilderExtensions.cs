@@ -197,3 +197,31 @@ public static partial class ModelBuilderExtensions
         return builder;
     }
 }
+
+public static class StringExtensions
+{
+    /// <summary>
+    /// Converts a string to snake_case
+    /// </summary>
+    public static string ToSnakeCase(this string input)
+    {
+        if (string.IsNullOrEmpty(input))
+        {
+            return input;
+        }
+
+        // Start by converting the entire string to lower case
+        var result = input;
+
+        // Insert underscore before uppercase letters that follow lowercase letters or numbers
+        result = Regex.Replace(result, @"([a-z0-9])([A-Z])", "$1_$2");
+
+        // Insert underscore before sequences of uppercase letters followed by lowercase letters
+        result = Regex.Replace(result, @"([A-Z])([A-Z][a-z])", "$1_$2");
+
+        // Convert the entire string to lower case
+        result = result.ToLower();
+
+        return result;
+    }
+}
